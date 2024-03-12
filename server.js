@@ -29,16 +29,16 @@ function verifyToken(req, res, next) {
       if (err) {
         res.clearCookie('accessToken', { path: '/', expires: new Date(0) });
         return res.status(401).json({ message: 'TokenFail' });
+      } else {
+        console.log(decoded.username);
+        req.headers['username'] = decoded.username;
+        next();
       }
     });
   }
 
-  
-
     // 요청에서 추출된 정보 활용 (예: 유저 아이디)
-    // req.cookie_id = decoded.id;
-    // req.cookie_name = decoded.name;
-    next();
+    
 }
 
 // API Gateway 설정
